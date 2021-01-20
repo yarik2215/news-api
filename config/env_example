@@ -1,0 +1,11 @@
+DJANGO_DEBUG=True
+DJANGO_SECRET_KEY="i!r9p+wmuj+mg+v@wn3of^4rf!wc_wzw30_*xmh$lir3pruab#"
+
+DATABASE_URL=postgres://django:django@db/postgres_dev
+
+TIME_ZONE=Europe/Kiev
+
+ALLOWED_HOSTS=0.0.0.0
+
+REDIS_HOST=redis
+REDIS_PORT=6379
