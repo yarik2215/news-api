@@ -12,17 +12,19 @@ from .serializers import (
 class NewsViewSet(viewsets.ModelViewSet):
     """
     list:
-    Return a list of all news.
+    Return a paginated list of all news.
 
     retrieve:
-    Return one news by id,
-    with related comments.
+    Return one news by id.
 
     create:
     Create new news instance.
 
     update:
     Update existing news by id.
+
+    partial_update:
+    Partial update existing news by id.
 
     destroy:
     Delete news by id.
@@ -42,10 +44,30 @@ class NewsViewSet(viewsets.ModelViewSet):
 
 class CommentsViewSet(viewsets.ModelViewSet):
     """
+    list:
+    Return a paginated list of comments for specified in url news.
+
+    retrieve:
+    Return one comment by id.
+
+    create:
+    Create new comment instance related to news specified in url.
+
+    update:
+    Update existing comment by id.
+
+    partial_update:
+    Partial update existing comment by id.
+
+    destroy:
+    Delete comment by id.
     """
     serializer_class = CommentSerializer
 
     def _get_news(self):
+        """
+        Get news id from url and return News instance with that id or 404.
+        """
         news_id = self.kwargs.get("news_pk")
         return get_object_or_404(News, pk=news_id)
 
