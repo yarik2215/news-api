@@ -142,8 +142,7 @@ cython_debug/
 .vscode 
 .env
 
-#Django secret key
-secret-key.txt
+*.sqlite*
+static/
 
-
-config/.env*
+config/.env

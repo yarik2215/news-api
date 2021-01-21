@@ -1,8 +1,7 @@
-version: '3.4'
+version: "3.4"
 
 services:
-  blogapi:
-    image: blogapi
+  newsapi:
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -10,8 +9,8 @@ services:
       [
         "sh",
         "-c",
+        "python manage.py rqworker --with-scheduler",
         "/docker_runserver.sh",
-        "python manage.py rqworker --with-scheduler"
       ]
     volumes:
       - .:/code/
@@ -49,6 +48,7 @@ services:
       - webnet
     expose:
       - 6379
+    
 
 networks:
   webnet:

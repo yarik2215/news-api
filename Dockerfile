@@ -10,8 +10,10 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 WORKDIR /code
-COPY . /code
+COPY . .
 
 # This is a special case. We need to run this script as an entry point:
 COPY ./docker_runserver.sh /
 RUN chmod +x /docker_runserver.sh
+
+ENTRYPOINT ["./docker_runserver.sh"]

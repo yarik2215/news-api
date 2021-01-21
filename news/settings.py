@@ -26,7 +26,7 @@ SECRET_KEY = env.str("DJANGO_SECRET_KEY", "i!r9p+wmuj+mg+v@wn3of^4rf!wc_wzw30_*x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
-ALLOWED_HOSTS = env.str("ALLOWED_HOSTS", "").split(',')
+ALLOWED_HOSTS = env.str("ALLOWED_HOSTS", "0.0.0.0").split(',')
 
 
 # Application definition
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'news.wsgi.application'
 
 
 DATABASES = {
-    'default': env.db("DATABASE_URL", default="sqlite://root@localhost/test.sqlite3")
+    'default': env.db("DATABASE_URL", default="sqlite:/test.sqlite")
 }
 
 
@@ -122,6 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # DRF
 REST_FRAMEWORK = {
