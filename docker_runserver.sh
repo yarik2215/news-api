@@ -4,4 +4,5 @@ echo "Run manage.py migrate"
 python manage.py collectstatic --noinput
 python manage.py migrate --noinput
 echo "Run server"
-exec  gunicorn news.wsgi -b 0.0.0.0:$PORT
+PORT="${VARIABLE:=8000}"
+exec ./manage.py rqworker --with-schedule & gunicorn news.wsgi -b 0.0.0.0:$PORT
